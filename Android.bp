@@ -1,0 +1,186 @@
+cc_library_shared {
+
+    name: "libtbbmalloc",
+    proprietary: true,
+    owner: "intel",
+    compile_multilib: "64",
+    defaults: ["hidl_defaults"],    
+
+    srcs: [
+        "src/tbbmalloc/backend.cpp",
+        "src/tbbmalloc/backref.cpp",
+        "src/tbbmalloc/frontend.cpp",
+        "src/tbbmalloc/large_objects.cpp",
+        "src/tbbmalloc/tbbmalloc.cpp",
+        "src/tbb/itt_notify.cpp"
+    ],
+
+    local_include_dirs: [
+        "include",
+        "include/oneapi",
+        "include/oneapi/tbb/detail",
+        "include/oneapi/tbb",
+        "include/tbb",
+        "src",
+        "src/tbb",
+        "src/tbb/tools_api",
+        "src/tbb/tools_api/legacy",
+        "src/tbbmalloc",
+        "src/tbbmalloc_proxy",
+    ],
+
+    include_dirs: [
+        "bionic/libc",
+    ],
+
+    cflags: [
+        "-g",
+        "-DANDROID",
+        "-fdata-sections",
+        "-ffunction-sections",
+        "-funwind-tables",
+        "-fstack-protector-strong",
+        "-no-canonical-prefixes",
+        "-fno-addrsig",
+        "-Wa,--noexecstack",
+        "-Wformat",
+        "-Wunused-private-field",
+        "-O2",
+        "-g",
+        "-DNDEBUG",
+        "-MMD",
+        "-fno-rtti",
+        "-D_FORTIFY_SOURCE=2",
+        "-pthread",
+        "-std=c++11",
+        "-fPIE",
+        "-fvisibility=default",
+        "-Wall",
+        "-Wno-unknown-pragmas",
+        "-Wno-strict-overflow",
+        "-Wno-unused-variable",
+        "-Wno-unused-parameter",
+        "-Wno-non-virtual-dtor",
+        "-Wno-missing-field-initializers",
+        "-Wno-error",
+        "-Wextra",
+        "-fexceptions",
+        "-fPIC"
+    ] + [
+        "-D__TBBMALLOC_BUILD",
+        "-D__TBB_USE_ITT_NOTIFY"
+    ],
+    shared_libs: [
+        "liblog",
+        "libc",
+        "libdl",
+        "libm"
+    ],
+
+    static_libs: [
+      
+    ]
+}
+
+cc_library_shared {
+
+    name: "libtbb",
+    proprietary: true,
+    owner: "intel",
+    compile_multilib: "64",
+    defaults: ["hidl_defaults"],
+
+    srcs: [
+        "src/tbb/allocator.cpp",
+        "src/tbb/arena.cpp",
+        "src/tbb/arena_slot.cpp",
+        "src/tbb/concurrent_bounded_queue.cpp",
+        "src/tbb/dynamic_link.cpp",
+        "src/tbb/exception.cpp",
+        "src/tbb/governor.cpp",
+        "src/tbb/global_control.cpp",
+        "src/tbb/itt_notify.cpp",
+        "src/tbb/main.cpp",
+        "src/tbb/market.cpp",
+        "src/tbb/misc.cpp",
+        "src/tbb/misc_ex.cpp",
+        "src/tbb/observer_proxy.cpp",
+        "src/tbb/parallel_pipeline.cpp",
+        "src/tbb/private_server.cpp",
+        "src/tbb/profiling.cpp",
+        "src/tbb/rml_tbb.cpp",
+        "src/tbb/rtm_mutex.cpp",
+        "src/tbb/rtm_rw_mutex.cpp",
+        "src/tbb/semaphore.cpp",
+        "src/tbb/small_object_pool.cpp",
+        "src/tbb/task.cpp",
+        "src/tbb/task_dispatcher.cpp",
+        "src/tbb/task_group_context.cpp",
+        "src/tbb/version.cpp",
+        "src/tbb/queuing_rw_mutex.cpp"
+    ],
+
+    local_include_dirs: [
+        "include",
+        "include/oneapi",
+        "include/oneapi/tbb",
+        "include/oneapi/tbb/detail",
+        "include/tbb",
+        "src",
+        "src/tbb",
+        "src/tbb/tools_api",
+        "src/tbb/tools_api/legacy",
+    ],
+
+    include_dirs: [
+        "bionic/libc",
+    ],
+
+    cflags: [
+        "-g",
+        "-DANDROID",
+        "-fdata-sections",
+        "-ffunction-sections",
+        "-funwind-tables",
+        "-fstack-protector-strong",
+        "-no-canonical-prefixes",
+        "-fno-addrsig",
+        "-Wa,--noexecstack",
+        "-Wformat",
+        "-Wunused-private-field",
+        "-O2",
+        "-g",
+        "-DNDEBUG",
+        "-MMD",
+        "-Wextra",
+        "-D_FORTIFY_SOURCE=2",
+        "-pthread",
+        "-std=c++11",
+        "-fPIE",
+        "-fvisibility=default",
+        "-Wall",
+        "-Wno-unknown-pragmas",
+        "-Wno-strict-overflow",
+        "-Wno-unused-variable",
+        "-Wno-unused-parameter",
+        "-Wno-non-virtual-dtor",
+        "-Wno-missing-field-initializers",
+        "-Wno-error",
+        "-Wextra",
+        "-fexceptions",
+        "-fPIC"
+    ] + [
+        "-D__TBB_BUILD",
+        "-D__TBB_USE_ITT_NOTIFY",
+    ],
+    shared_libs: [
+        "liblog",
+        "libc",
+        "libdl",
+        "libm"
+    ],
+
+    static_libs: [
+      
+    ]
+}

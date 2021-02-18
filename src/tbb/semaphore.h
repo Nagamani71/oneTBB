@@ -27,7 +27,7 @@
 #include <mach/mach_init.h>
 #include <mach/error.h>
 #else
-#include <semaphore.h>
+#include "include/semaphore.h"
 #ifdef TBB_USE_DEBUG
 #include <cerrno>
 #endif
